@@ -10,6 +10,11 @@ X_norm = X;
 mu = zeros(1, size(X, 2));
 sigma = zeros(1, size(X, 2));
 
+mu = mean(X_norm);
+sigma = std(X_norm);
+X_norm_trans = (X_norm' - mu')./sigma';
+X_norm = X_norm_trans';
+#disp(X_norm);
 % ====================== YOUR CODE HERE ======================
 % Instructions: First, for each feature dimension, compute the mean
 %               of the feature and subtract it from the dataset,

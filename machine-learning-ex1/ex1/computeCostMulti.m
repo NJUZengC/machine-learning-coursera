@@ -13,7 +13,9 @@ J = 0;
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
 
-
+predict_y = X * theta;
+cost = predict_y - y;
+J = cost' * cost/(2*m);
 
 
 

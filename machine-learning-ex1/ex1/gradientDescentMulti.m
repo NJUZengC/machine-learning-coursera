@@ -16,10 +16,11 @@ for iter = 1:num_iters
     % Hint: While debugging, it can be useful to print out the values
     %       of the cost function (computeCostMulti) and gradient here.
     %
-
-
-
-
+    predict_y = X * theta;
+    gap = predict_y - y;
+    delta_theta = X' * gap/m;
+    #disp(gap);
+    theta = theta - alpha * delta_theta;
 
 
 

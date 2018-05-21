@@ -12,10 +12,10 @@ if ~exist('lambda', 'var') || isempty(lambda)
     lambda = 0;
 end
 
-input_layer_size = 3;
-hidden_layer_size = 5;
-num_labels = 3;
-m = 5;
+input_layer_size = 3;%3
+hidden_layer_size = 5;%5
+num_labels = 3;%3
+m = 5;%5
 
 % We generate some 'random' test data
 Theta1 = debugInitializeWeights(hidden_layer_size, input_layer_size);

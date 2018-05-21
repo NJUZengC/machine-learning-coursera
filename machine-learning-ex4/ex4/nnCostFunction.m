@@ -62,12 +62,42 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+Y = zeros(m,num_labels);
+for i=1:m
+  temp = zeros(1,num_labels);
+  temp(y(i)) = 1;
+  Y(i,:) = temp;
+end
+
+X = [ones(m,1) X];
+H = sigmoid(X * Theta1');
+H = [ones(m,1) H];
+predict_y = sigmoid(H * Theta2');
+
+
+for i=1:m
+  for j=1:num_labels
+    J += ( -Y(i,j) * log(predict_y(i,j)) - (1 - Y(i,j)) * log(1 - predict_y(i,j)));
+  end
+end
+
+J = J/m + (lambda / 2/m) * (sum(sum(Theta1(:,2:size(Theta1,2)) .^2)) +  sum(sum(Theta2(:,2:size(Theta2,2)) .^2)));
 
 
 
 
 
 
+g = predict_y - Y;
+g = g ;
+
+Theta2_grad = g' * H/m + (lambda/m) * Theta2;
+Theta2_grad(:,1) = Theta2_grad(:,1)  - (lambda/m) * Theta2(:,1);
+g = (Theta2' * g')';
+
+g = g(:,2:size(g,2)) .* H(:,2:size(H,2)) .* (1-H(:,2:size(H,2)));
+Theta1_grad = g' * X/m + (lambda/m) * Theta1;;
+Theta1_grad(:,1) = Theta1_grad(:,1)  - (lambda/m) * Theta1(:,1);
 
 
 

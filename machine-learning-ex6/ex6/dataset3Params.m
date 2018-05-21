@@ -23,8 +23,25 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+list = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
+num = 8;
 
+bestScore = 1;
 
+for i=1:num
+  for j = 1:num
+    test_C = list(i);
+    test_sigma = list(j);
+    model= svmTrain(X, y, test_C, @(x1, x2) gaussianKernel(x1, x2, test_sigma));
+    predictions = svmPredict(model,Xval);
+    score =  mean(double(predictions ~= yval));
+    if score < bestScore
+      C = test_C;
+      sigma = test_sigma;
+      bestScore = score;
+    end
+  end
+end
 
 
 
